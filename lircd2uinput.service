@@ -1,0 +1,12 @@
+[Unit]
+Description=lircd2uinput daemon
+After=lirc.service
+Requires=lirc.service
+
+[Service]
+ExecStartPre=while [ ! -e /run/lirc/lirc ]; do sleep 1; done
+ExecStart=/usr/bin/lircd2uinput  --lircd-socket=/run/lirc/lirc 
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
